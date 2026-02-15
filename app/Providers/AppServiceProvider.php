@@ -25,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
             return config('app.frontend_url')."/password-reset/$token?email={$notifiable->getEmailForPasswordReset()}";
         });
 
-        Schema::defaultStringLenght(191);
+        Schema::defaultStringLength(191);
     }
 }
