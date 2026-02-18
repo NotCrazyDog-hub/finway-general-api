@@ -16,6 +16,10 @@ class Goal extends Model
         'steps'
     ];
 
+    protected $casts = [
+        'steps' => 'array'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
