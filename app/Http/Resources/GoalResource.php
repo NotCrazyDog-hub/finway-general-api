@@ -15,10 +15,10 @@ class GoalResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'goal_id' => $this->id,
+            'goalId' => $this->id,
             'name' => $this->name,
-            'steps' => $this->steps,
-            'created_at' => $this->created_at
+            'steps' => $this->when($request->routeis('goals.show', $this->steps ?? [])),
+            'createdAt' => $this->created_at
         ];
     }
 }
