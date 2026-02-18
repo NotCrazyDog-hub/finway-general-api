@@ -11,7 +11,7 @@ class GoalRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class GoalRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:191',
+            'steps' => 'required|array|min:1',
+            'steps.*' => 'string|min:3|max:191'
         ];
     }
 }
