@@ -13,22 +13,22 @@ class Feedback extends Model
         'user_id',
         'subject',
         'message',
-        'type',
         'status',
         'admin_reply',
     ];
 
     protected $casts = [
+        'subject' => 'integer',
         'status' => 'integer',
-        'type' => 'integer',
     ];
 
     const STATUS_ABERTO = 0;
     const STATUS_RESPONDIDO = 1;
 
-    const TYPE_DUVIDA = 0;
-    const TYPE_SUGESTAO = 1;
-    const TYPE_BUG = 2;
+    const SUBJECT_DUVIDA = 0;
+    const SUBJECT_SUGESTAO = 1;
+    const SUBJECT_BUG = 2;
+    const SUBJECT_OUTRO = 3;
 
     public function user()
     {
@@ -60,5 +60,16 @@ class Feedback extends Model
     public function estaRespondido()
     {
         return $this->status === self::STATUS_RESPONDIDO;
+    }
+
+    public function getSubjectNomeAttribute()
+    {
+        return match ($this->subject) {
+            self::SUBJECT_DUVIDA => 'Dúvida',
+            self::SUBJECT_SUGESTAO => 'Sugestão',
+            self::SUBJECT_BUG => 'Bug',
+            self::SUBJECT_OUTRO => 'Outro',
+            default => 'Desconhecido',
+        };
     }
 }

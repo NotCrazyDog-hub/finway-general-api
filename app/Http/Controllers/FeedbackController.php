@@ -22,20 +22,21 @@ class FeedbackController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'subject' => 'required|string|max:255',
+            'subject' => 'required|integer|in:0,1,2,3',
             'message' => 'required|string',
-            'type'    => 'required|integer|in:0,1,2',
         ]);
 
         $feedback = Feedback::create([
             'user_id' => $request->user()->id,
             'subject' => $validated['subject'],
             'message' => $validated['message'],
-            'type'    => $validated['type'],
             'status'  => Feedback::STATUS_ABERTO,
         ]);
 
-        return response()->json($feedback, Response::HTTP_CREATED);
+        return response()->json([
+            'feedback' => $feedback,
+            'subject_nome' => $feedback->subject_nome,
+        ], Response::HTTP_CREATED);
     }
 
     public function show(Feedback $feedback)
