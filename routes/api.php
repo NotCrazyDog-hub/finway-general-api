@@ -6,5 +6,8 @@ use App\Http\Controllers\GoalController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
+});
+    
+Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('goals', GoalController::class);
 });
