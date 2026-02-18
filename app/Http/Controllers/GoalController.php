@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Goal;
 use App\Http\Resources\GoalResource;
+use App\Http\Requests\GoalRequest;
 use Illuminate\Http\Request;
 
 class GoalController extends Controller
@@ -13,17 +14,17 @@ class GoalController extends Controller
      */
     public function index()
     {
-        $goals = Goal::all();
+        $goals = auth()->user()->goals()->get();
         return GoalResource::collection($goals);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(GoalRequest $request)
     {
-        $goal = Goal::create($request->all());
-        return response()->json($goal);
+        $goal = auth()->user()->goals()->create($request->validated());
+        return (new GoalResource($goal))->response()->setStatusCode(201);
     }
 
     /**
@@ -31,15 +32,17 @@ class GoalController extends Controller
      */
     public function show(Goal $goal)
     {
-        //
+        $this->authorize('view', $goal);
+        return new GoalResource($goal);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Goal $goal)
+    public function update(GoalRequest $request, Goal $goal)
     {
-        $goal->update($request->all());
+        $this->authorize('update', $goal);
+        $goal->update($request->validated());
         return new GoalResource($goal);
     }
 
@@ -48,7 +51,8 @@ class GoalController extends Controller
      */
     public function destroy(Goal $goal)
     {
+        $this->authorize('delete', $goal);
         $goal->delete();
-        return response(null);
+        return response()->noContent();
     }
 }
