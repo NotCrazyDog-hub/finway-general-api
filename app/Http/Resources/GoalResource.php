@@ -17,7 +17,7 @@ class GoalResource extends JsonResource
         return [
             'goalId' => $this->id,
             'name' => $this->name,
-            'steps' => $this->steps ?? [],
+            'steps' => $this->steps,
             'createdAt' => $this->created_at
         ];
     }

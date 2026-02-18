@@ -23,8 +23,7 @@ class GoalRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:191',
-            'steps' => 'required|array|min:1',
-            'steps.*' => 'string|min:3|max:191'
+            'steps' => 'nullable|string'
         ];
     }
 }
