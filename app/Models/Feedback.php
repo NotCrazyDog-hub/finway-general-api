@@ -20,10 +20,15 @@ class Feedback extends Model
 
     protected $casts = [
         'status' => 'integer',
+        'type' => 'integer',
     ];
 
     const STATUS_ABERTO = 0;
     const STATUS_RESPONDIDO = 1;
+
+    const TYPE_DUVIDA = 0;
+    const TYPE_SUGESTAO = 1;
+    const TYPE_BUG = 2;
 
     public function user()
     {

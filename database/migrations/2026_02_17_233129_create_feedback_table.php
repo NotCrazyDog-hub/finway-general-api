@@ -20,7 +20,7 @@ return new class extends Migration
 
             $table->string('subject');
             $table->text('message');
-            $table->string('type');
+            $table->tinyInteger('type');
             $table->tinyInteger('status')->default(0);
             $table->text('admin_reply')->nullable();
             $table->timestamps();
