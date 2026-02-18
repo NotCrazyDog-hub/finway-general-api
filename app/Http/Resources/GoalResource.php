@@ -17,7 +17,7 @@ class GoalResource extends JsonResource
         return [
             'goalId' => $this->id,
             'name' => $this->name,
-            'steps' => $this->when($request->routeis('goals.show', $this->steps ?? [])),
+            'steps' => $this->when($request->routeIs('goals.show'), $this->steps ?? []),
             'createdAt' => $this->created_at
         ];
     }
