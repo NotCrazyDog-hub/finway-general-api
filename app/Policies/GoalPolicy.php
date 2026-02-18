@@ -13,7 +13,7 @@ class GoalPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class GoalPolicy
      */
     public function view(User $user, Goal $goal): bool
     {
-        return false;
+        return $goal->user_id === $user->id;
     }
 
     /**
@@ -29,7 +29,7 @@ class GoalPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class GoalPolicy
      */
     public function update(User $user, Goal $goal): bool
     {
-        return false;
+        return $goal->user_id === $user->id;
     }
 
     /**
@@ -45,6 +45,6 @@ class GoalPolicy
      */
     public function delete(User $user, Goal $goal): bool
     {
-        return false;
+        return $goal->user_id === $user->id;
     }
 }
