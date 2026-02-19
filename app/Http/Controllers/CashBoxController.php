@@ -14,7 +14,7 @@ class CashBoxController extends Controller
      */
     public function index()
     {
-        $cashBoxes = CashBox::all();
+        $cashBoxes = auth()->user()->cash_boxes()->get();
         $total = $cashBoxes->sum('amount');
         return response()->json([
             'total' => $total,
@@ -28,7 +28,8 @@ class CashBoxController extends Controller
      */
     public function store(CashBoxRequest $request)
     {
-        //
+        $cashBox = auth()->user()->cash_boxes()->create($request->validated());
+        return (new CashBoxResource($cashBox))->response()->setStatusCode(201);
     }
 
     /**
@@ -36,7 +37,7 @@ class CashBoxController extends Controller
      */
     public function show(CashBox $cashBox)
     {
-        //
+        return new CashBoxResource($cashBox);
     }
 
     /**
@@ -44,7 +45,8 @@ class CashBoxController extends Controller
      */
     public function update(CashBoxRequest $request, CashBox $cashBox)
     {
-        //
+        $cashBox->update($request->validated());
+        return new CashBoxResource($cashBox);
     }
 
     /**
@@ -52,6 +54,7 @@ class CashBoxController extends Controller
      */
     public function destroy(CashBox $cashBox)
     {
-        //
+        $cashBox->delete();
+        return response()->noContent();
     }
 }
