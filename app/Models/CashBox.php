@@ -10,4 +10,8 @@ class CashBox extends Model
         'name',
         'amount'
     ];
+
+    protected $casts = [
+        'amount' => 'decimal:2'
+    ];
 }
