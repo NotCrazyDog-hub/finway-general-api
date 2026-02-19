@@ -47,20 +47,4 @@ class CashBoxPolicy
     {
         return false;
     }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, CashBox $cashBox): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, CashBox $cashBox): bool
-    {
-        return false;
-    }
 }
