@@ -21,7 +21,7 @@ class CashBoxPolicy
      */
     public function view(User $user, CashBox $cashBox): bool
     {
-        return $goal->user_id === $user->id;
+        return $cashBox->user_id === $user->id;
     }
 
     /**
@@ -37,7 +37,7 @@ class CashBoxPolicy
      */
     public function update(User $user, CashBox $cashBox): bool
     {
-        return $goal->user_id === $user->id;
+        return $cashBox->user_id === $user->id;
     }
 
     /**
@@ -45,6 +45,6 @@ class CashBoxPolicy
      */
     public function delete(User $user, CashBox $cashBox): bool
     {
-        return $goal->user_id === $user->id;
+        return $cashBox->user_id === $user->id;
     }
 }
