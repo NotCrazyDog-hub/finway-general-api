@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CashBox;
 use App\Http\Resources\CashBoxResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Number;
 
 class CashBoxController extends Controller
 {
@@ -13,7 +14,13 @@ class CashBoxController extends Controller
      */
     public function index()
     {
-        //
+        $cashBoxes = CashBox::all();
+        $total = $cashBoxes->sum('amount');
+        return response()->json([
+            'total' => $total,
+            'total_formatted' => Number::currency($total, 'BRL'),
+            'data' => CashBoxResource::collection($cashBoxes)
+        ]);
     }
 
     /**
