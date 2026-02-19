@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('cash_boxes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->string('name');
+            $table->decimal('amount', 10, 2);
             $table->timestamps();
         });
     }
