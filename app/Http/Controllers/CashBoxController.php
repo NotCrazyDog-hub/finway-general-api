@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CashBox;
 use App\Http\Resources\CashBoxResource;
-use Illuminate\Http\Request;
+use App\Http\Requests\CashBoxRequest;
 use Illuminate\Support\Number;
 
 class CashBoxController extends Controller
@@ -26,7 +26,7 @@ class CashBoxController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CashBoxRequest $request)
     {
         //
     }
@@ -42,7 +42,7 @@ class CashBoxController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CashBox $cashBox)
+    public function update(CashBoxRequest $request, CashBox $cashBox)
     {
         //
     }
