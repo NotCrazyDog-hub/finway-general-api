@@ -16,7 +16,7 @@ class CashBoxResource extends JsonResource
     public function toArray(Request $request): array
     {
          return [
-            'cashBoxesId' => $this->id,
+            'cashBoxId' => $this->id,
             'name' => $this->name,
             'amount' => $this->amount,
             'amountFormatted' => Number::currency($this->amount, 'BRL'),
