@@ -37,6 +37,7 @@ class CashBoxController extends Controller
      */
     public function show(CashBox $cashBox)
     {
+        $this->authorize('view', $cashBox);
         return new CashBoxResource($cashBox);
     }
 
@@ -45,6 +46,7 @@ class CashBoxController extends Controller
      */
     public function update(CashBoxRequest $request, CashBox $cashBox)
     {
+        $this->authorize('update', $cashBox);
         $cashBox->update($request->validated());
         return new CashBoxResource($cashBox);
     }
@@ -54,6 +56,7 @@ class CashBoxController extends Controller
      */
     public function destroy(CashBox $cashBox)
     {
+        $this->authorize('delete', $cashBox);
         $cashBox->delete();
         return response()->noContent();
     }
