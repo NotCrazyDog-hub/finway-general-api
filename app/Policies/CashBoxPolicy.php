@@ -13,7 +13,7 @@ class CashBoxPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class CashBoxPolicy
      */
     public function view(User $user, CashBox $cashBox): bool
     {
-        return false;
+        return $goal->user_id === $user->id;
     }
 
     /**
@@ -29,7 +29,7 @@ class CashBoxPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class CashBoxPolicy
      */
     public function update(User $user, CashBox $cashBox): bool
     {
-        return false;
+        return $goal->user_id === $user->id;
     }
 
     /**
@@ -45,6 +45,6 @@ class CashBoxPolicy
      */
     public function delete(User $user, CashBox $cashBox): bool
     {
-        return false;
+        return $goal->user_id === $user->id;
     }
 }
