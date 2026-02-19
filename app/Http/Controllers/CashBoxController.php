@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CashBox;
+use App\Http\Resources\CashBoxResource;
 use Illuminate\Http\Request;
 
 class CashBoxController extends Controller
