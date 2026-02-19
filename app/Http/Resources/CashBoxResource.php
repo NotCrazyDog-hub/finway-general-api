@@ -14,6 +14,11 @@ class CashBoxResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+         return [
+            'cashBoxesId' => $this->id,
+            'name' => $this->name,
+            'amount' => $this->amount,
+            'createdAt' => $this->created_at
+        ];
     }
 }
