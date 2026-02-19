@@ -23,7 +23,7 @@ class CashBoxRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:191',
-            'steps' => 'required|numeric|min:0'
+            'amount' => 'required|numeric|min:0'
         ];
     }
 }
