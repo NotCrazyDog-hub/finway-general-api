@@ -5,6 +5,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FeedbackController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GoalController;
+use App\Http\Controllers\CashBoxController;
 
 
 Route::middleware(['auth:sanctum'])->group(function () {
@@ -23,11 +25,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/feedbacks', [FeedbackController::class, 'store']);
     Route::get('/feedbacks/{feedback}', [FeedbackController::class, 'show']);
     Route::patch('/feedbacks/{feedback}/reply', [FeedbackController::class, 'reply']);
+
+    Route::apiResource('goals', GoalController::class);
+    Route::apiResource('cash-boxes', CashBoxController::class);
 });
 
 require __DIR__.'/auth.php';
-
-
-
-
-
