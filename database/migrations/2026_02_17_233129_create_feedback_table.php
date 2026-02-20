@@ -18,9 +18,8 @@ return new class extends Migration
                 ->constrained('users')
                 ->onDelete('cascade');
 
-            $table->string('subject');
+            $table->tinyInteger('subject');
             $table->text('message');
-            $table->tinyInteger('type');
             $table->tinyInteger('status')->default(0);
             $table->text('admin_reply')->nullable();
             $table->timestamps();
