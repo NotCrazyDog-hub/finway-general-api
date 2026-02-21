@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Goal;
 use App\Http\Resources\GoalResource;
+use App\Http\Resources\GoalListResource;
 use App\Http\Requests\GoalRequest;
 
 class GoalController extends Controller
@@ -14,7 +15,7 @@ class GoalController extends Controller
     public function index()
     {
         $goals = auth()->user()->goals()->get();
-        return GoalResource::collection($goals);
+        return GoalListResource::collection($goals);
     }
 
     /**
