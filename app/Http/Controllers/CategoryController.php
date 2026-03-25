@@ -13,7 +13,7 @@ class CategoryController extends Controller
     {
         $categories = Category::whereNull('user_id')
             ->orWhere('user_id', $request->user()->id)
-            ->orderBy('name')
+            ->orderBy('id')
             ->get();
 
         return response()->json($categories);
