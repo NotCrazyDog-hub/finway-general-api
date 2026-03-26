@@ -11,8 +11,16 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
-        $categories = Category::whereNull('user_id')
-            ->orWhere('user_id', $request->user()->id)
+        $type = $request->query('type');
+
+        $categories = Category::where(function ($query) use ($request) {
+                $query->whereNull('user_id')
+                    ->orWhere('user_id', $request->user()->id);
+            })
+            ->when($type, function ($query, $type) {
+                $query->where('type', $type)
+                ->orWhere('type', 'both');
+            })
             ->orderBy('id')
             ->get();
 
