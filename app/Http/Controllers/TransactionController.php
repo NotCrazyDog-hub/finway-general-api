@@ -10,12 +10,31 @@ class TransactionController extends Controller
 {
     public function index(Request $request)
     {
-        $transactions = Transaction::where('user_id', $request->user()->id)
+        $userId = $request->user()->id;
+
+        $transactions = Transaction::where('user_id', $userId)
             ->with('category')
             ->latest()
             ->get();
 
-        return response()->json($transactions);
+        $total = Transaction::where('user_id', $userId)
+            ->sum('amount');
+
+        $income = Transaction::where('user_id', $userId)
+            ->where('amount', '>', 0)
+            ->sum('amount');
+
+        $expenses = Transaction::where('user_id', $userId)
+            ->where('amount', '<', 0)
+            ->sum('amount');
+
+        return response()->json([
+            'transactions' => $transactions,
+            'total' => $total,
+            'income' => $income,
+            'expenses' => $expenses
+            
+        ]);
     }
 
     public function store(Request $request)
